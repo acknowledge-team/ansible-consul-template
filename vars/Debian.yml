@@ -1,0 +1,3 @@
+---
+consul_template_os_packages:
+  - unzip
