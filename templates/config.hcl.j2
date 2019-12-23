@@ -60,14 +60,14 @@ syslog {
 template {
   source = "{{ tpl.source }}"
   destination = "{{ tpl.destination }}"
-  {% if tpl.create_dest_dirs is defined %}
+  {% if tpl.create_dest_dirs is defined -%}
   create_dest_dirs = {{ tpl.create_dest_dirs | bool | lower }}
   {% endif %}
-  {% if tpl.command is defined %}
+  {% if tpl.command is defined -%}
   command = "{{ tpl.command }}"
   {% endif %}
-  {% if tpl.command_timeout is defined %}
+  {% if tpl.command_timeout is defined -%}
   command_timeout = "{{ tpl.command_timeout }}"
   {% endif %}
 }
-{% endfor %}}
+{% endfor %}
