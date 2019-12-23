@@ -63,6 +63,10 @@
   run_once: true
   delegate_to: 127.0.0.1
 
+- name: Print consul_template_sha256 variable
+  debug: 
+    msg: "{{ consul_template_sha256 }}"
+
 - name: Check Consul template package file
   stat:
     path: "{{ role_path }}/files/{{ consul_template_pkg }}"
