@@ -1,23 +1,11 @@
 ---
-### Consul base configuration
-- name: Consul base configuration
+### Consul template configuration
+- name: Consul template configuration
   template:
-    src: base.hcl.j2
-    dest: "{{ consul_config_path }}/base.hcl"
-    owner: "{{ consul_user }}"
-    group: "{{ consul_group }}"
+    src: config.hcl.j2
+    dest: "{{ consul_template_config_path }}/{{ consul_template_config_filename }}"
+    owner: "{{ consul_template_user }}"
+    group: "{{ consul_template_group }}"
     mode: 0644
   notify:
-    - restart consul
-
-### Consul server configuration
-- name: Consul server configuration
-  template:
-    src: server.hcl.j2
-    dest: "{{ consul_config_path }}/server.hcl"
-    owner: "{{ consul_user }}"
-    group: "{{ consul_group }}"
-    mode: 0644
-  notify:
-    - restart consul
-  when: consul_node_role == "server"
+    - restart consul template

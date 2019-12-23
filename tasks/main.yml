@@ -12,5 +12,5 @@
 - name: Include consul installation tasks for Debian
   include: "install_{{ ansible_os_family }}.yml"
 
-#- name: Include consul configurations tasks
-#  include: configure.yml
+- name: Include consul configurations tasks
+  include: configure.yml
