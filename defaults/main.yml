@@ -62,6 +62,11 @@ consul_template_wait_max: "10s"
 consul_template_syslog_enabled: true 
 consul_template_syslog_facility: "LOCAL5"
 
+# template files to transfer to target host
+consul_template_files:
+  - { "src": "files/example.tpl", "dest_filename": "example.tpl" }
+  - { "src": "files/example1.tpl", "dest_filename": "example1.tpl" }
+
 # templates list and configuration
 templates:
-  - { "source": "{{ role_path }}/files/example.tpl", "destination": "/etc/example/file.conf", "create_dest_dirs": true, "command": "systemctl reload example", "command_timeout": "40s" }
+  - { "source": "{{ consul_template_data_path }}/example.tpl", "destination": "/etc/example/file.conf", "create_dest_dirs": true, "command": "systemctl reload example", "command_timeout": "40s" }
