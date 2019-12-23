@@ -25,6 +25,43 @@ consul_template_run_path: "/var/run/consul-template"
 consul_template_binary: "{{ consul_template_bin_path }}/consul-template"
 consul_template_config_filename: "config.hcl"
 
-### Consul user and group settings
+### Consul template user and group settings
 consul_template_user: "consul-template"
 consul_template_group: "consul-template"
+
+### Consul template configuration
+# Consul section
+consul_template_auth: false
+consul_template_username: ""
+consul_template_password: ""
+consul_template_address: "127.0.0.1:8500"
+consul_token_required: false
+consul_token: ""
+consul_template_retry_enabled: true
+consul_template_attempts: 12
+consul_template_retries_backoff: "250ms"
+consul_template_retries_max_backoff: "1m"
+consul_template_ssl_enabled: true 
+consul_template_ssl_verify: true 
+consul_template_ssl_cert: "/path/to/cert" 
+consul_template_ssl_key: "/path/to/key"
+consul_template_ssl_ca_cert: "/path/to/ca/cert"
+consul_template_ssl_ca_path: "/path/to/ca"
+consul_template_ssl_server_name: "server-name.local"
+
+# Global consul template settings
+consul_template_reload_signal: "SIGHUP"
+consul_template_kill_signal: "SIGINT"
+consul_template_max_stale: "10m"
+consul_template_log_level: "warn"
+consul_template_pid_file: "{{ consul_template_run_path }}/consul-template.pid"
+consul_template_wait_min: "5s" 
+consul_template_wait_max: "10s"
+
+# syslog configuration
+consul_template_syslog_enabled: true 
+consul_template_syslog_facility: "LOCAL5"
+
+# templates list and configuration
+templates:
+  - { "source": "{{ role_path }}/files/example.tpl", "destination": "/etc/example/file.conf", "create_dest_dirs": true, "command": "systemctl reload example", "command_timeout": "40s" }
