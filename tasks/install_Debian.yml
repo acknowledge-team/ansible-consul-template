@@ -55,7 +55,8 @@
   delegate_to: 127.0.0.1
 
 - name: Print consul_template_checksum variable
-  debug: "{{ consul_template_checksum }}"
+  debug: 
+    msg: "{{ consul_template_checksum }}"
 
 - name: Read package checksum
   shell: grep "{{ consul_template_pkg }}" "{{ role_path }}/files/consul-template_{{ consul_template_version }}_SHA256SUMS" | awk '{print $1}'
