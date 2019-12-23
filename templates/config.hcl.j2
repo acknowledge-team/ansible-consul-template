@@ -69,5 +69,8 @@ template {
   {% if tpl.command_timeout is defined -%}
   command_timeout = "{{ tpl.command_timeout }}"
   {% endif %}
+  {% if tpl.perms is defined %}
+  perms = {{ tpl.perms }}
+  {% endif %}
 }
 {% endfor %}
