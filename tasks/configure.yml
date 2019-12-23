@@ -8,6 +8,8 @@
     group: "{{ consul_template_group }}"
     mode: 0644
   loop: "{{ consul_template_files }}"
+  notify:
+    - restart consul-template
 
 - name: Consul template configuration
   template:
@@ -17,5 +19,5 @@
     group: "{{ consul_template_group }}"
     mode: 0644
   notify:
-    - restart consul template
+    - restart consul-template
 
