@@ -1,73 +1,73 @@
 consul {
   # Authentication to consul
   auth {
-    enabled  = {{ consul_template_auth }}
+    enabled  = {{ consul_template_auth | bool | lower }}
     {% if consul_template_auth | bool == True %}
-    username = {{ consul_template_username }}
-    password = {{ consul_template_password }}
+    username = "{{ consul_template_username }}"
+    password = "{{ consul_template_password }}"
     {% endif %}
   }
 
   # Consul address
   # Local consul agent is recommended
-  address = {{ consul_template_address }}
+  address = "{{ consul_template_address }}"
   
-  # Consul token
   {% if consul_token_required | bool == True %}
-  token = {{ consul_template_token }}
+  # Consul token
+  token = "{{ consul_template_token }}"
   {% endif %}
 
   # Consul template retry behavior
   retry {
-    enabled = {{ consul_template_retry_enabled }}
-    attempts = {{ consul_template_attempts }} 
-    backoff = {{ consul_template_retries_backoff }}
-    max_backoff = {{ consul_template_retries_max_backoff }}
+    enabled = {{ consul_template_retry_enabled | bool | lower }}
+    attempts = "{{ consul_template_attempts }}"
+    backoff = "{{ consul_template_retries_backoff }}"
+    max_backoff = "{{ consul_template_retries_max_backoff }}"
   }
 
   # TLS configuration for consul communication
   ssl {
-    enabled = {{ consul_template_ssl_enabled }}
+    enabled = "{{ consul_template_ssl_enabled | bool | lower }}"
     {% if consul_template_ssl_enabled  | bool == True %}
-    verify = {{ consul_template_ssl_verify }}
-    cert = {{ consul_template_ssl_cert }}
-    key  = {{ consul_template_ssl_key }}
-    ca_cert = {{ consul_template_ssl_ca_cert }}
-    ca_path = {{ consul_template_ssl_ca_path }}
-    server_name = {{ consul_template_ssl_server_name }} 
+    verify = {{ consul_template_ssl_verify | bool | lower }}
+    cert = "{{ consul_template_ssl_cert }}"
+    key  = "{{ consul_template_ssl_key }}"
+    ca_cert = "{{ consul_template_ssl_ca_cert }}"
+    ca_path = "{{ consul_template_ssl_ca_path }}"
+    server_name = "{{ consul_template_ssl_server_name }}"
     {% endif %}
   }
 }
 
-reload_signal = {{ consul_template_reload_signal }}
-kill_signal = {{ consul_template_kill_signal }}
-max_stale = {{ consul_template_max_stale }}
-log_level = {{ consul_template_log_level }}
-pid_file = {{ consul_template_pid_file }}
+reload_signal = "{{ consul_template_reload_signal }}"
+kill_signal = "{{ consul_template_kill_signal }}"
+max_stale = "{{ consul_template_max_stale }}"
+log_level = "{{ consul_template_log_level }}"
+pid_file = "{{ consul_template_pid_file }}"
 wait {
-  min = {{ consul_template_wait_min }}
-  max = {{ consul_template_wait_max }}
+  min = "{{ consul_template_wait_min }}"
+  max = "{{ consul_template_wait_max }}"
 }
 
 {% if consul_template_syslog_enabled | bool == True %}
 syslog {
-  enabled = {{ consul_template_syslog_enabled }}
-  facility = {{ consul_template_syslog_facility }}
+  enabled = {{ consul_template_syslog_enabled | bool | lower }}
+  facility = "{{ consul_template_syslog_facility }}"
 }
 {% endif %}
 
 {% for tpl in templates %}
 template {
-  source = {{ tpl.source }}
-  destination = {{ tpl.destination }}
+  source = "{{ tpl.source }}"
+  destination = "{{ tpl.destination }}"
   {% if tpl.create_dest_dirs is defined %}
-  create_dest_dirs = {{ tpl.create_dest_dirs }}
+  create_dest_dirs = {{ tpl.create_dest_dirs | bool | lower }}
   {% endif %}
   {% if tpl.command is defined %}
-  command = {{ tpl.command }}
+  command = "{{ tpl.command }}"
   {% endif %}
   {% if tpl.command_timeout is defined %}
-  command_timeout = {{ tpl.command_timeout }}
+  command_timeout = "{{ tpl.command_timeout }}"
   {% endif %}
 }
 {% endfor %}}
