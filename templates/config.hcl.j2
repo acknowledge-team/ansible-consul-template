@@ -20,14 +20,14 @@ consul {
   # Consul template retry behavior
   retry {
     enabled = {{ consul_template_retry_enabled | bool | lower }}
-    attempts = "{{ consul_template_attempts }}"
+    attempts = {{ consul_template_attempts }}
     backoff = "{{ consul_template_retries_backoff }}"
     max_backoff = "{{ consul_template_retries_max_backoff }}"
   }
 
   # TLS configuration for consul communication
   ssl {
-    enabled = "{{ consul_template_ssl_enabled | bool | lower }}"
+    enabled = {{ consul_template_ssl_enabled | bool | lower }}
     {% if consul_template_ssl_enabled  | bool == True %}
     verify = {{ consul_template_ssl_verify | bool | lower }}
     cert = "{{ consul_template_ssl_cert }}"
