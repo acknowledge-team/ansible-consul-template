@@ -1,2 +1,9 @@
 ---
-# handlers file for ansible-consul-template
+# handlers file for ansible-consul
+
+- name: restart Linux consul template
+  service:
+    name: consul-template
+    state: restarted
+  when: ansible_os_family != "Windows"
+  listen: 'restart consul-template'
