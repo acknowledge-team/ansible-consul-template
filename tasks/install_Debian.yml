@@ -50,13 +50,14 @@
   become: false
   vars:
     ansible_become: false
+  register: debug_dl_checksum
   run_once: true
   when: not consul_template_checksum.stat.exists | bool
   delegate_to: 127.0.0.1
 
 - name: Print consul_template_checksum variable
   debug: 
-    msg: "{{ consul_template_checksum }}"
+    msg: "{{ debug_dl_checksum }}"
 
 - name: Read package checksum
   shell: grep "{{ consul_template_pkg }}" "{{ role_path }}/files/consul-template_{{ consul_template_version }}_SHA256SUMS" | awk '{print $1}'
