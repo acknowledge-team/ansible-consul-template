@@ -15,7 +15,7 @@ consul_template_architecture: "{{ consul_template_architecture_map[ansible_archi
 consul_template_os: "{{ ansible_system | lower }}"
 consul_template_pkg: "consul-template_{{ consul_template_version }}_{{ consul_template_os }}_{{ consul_template_architecture }}.zip"
 consul_template_zip_url: "https://releases.hashicorp.com/consul-template/{{ consul_template_version }}/consul-template_{{ consul_template_version }}_{{ consul_template_os }}_{{ consul_template_architecture }}.zip"
-consul_template_checksum_file_url: "https://releases.hashicorp.com/consul-template/{{ consul_template_version }}/consul-template_{{ consul_template_version}}_SHA256SUMS"
+consul_template_checksum_file_url: "https://releases.hashicorp.com/consul-template/{{ consul_template_version }}/consul-template_{{ consul_template_version }}_SHA256SUMS"
 
 ### Paths
 consul_template_bin_path: "/usr/local/bin"

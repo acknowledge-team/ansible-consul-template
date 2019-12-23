@@ -46,7 +46,7 @@
 - name: Download package checksum file
   get_url:
     url: "{{ consul_template_checksum_file_url }}"
-    dest: "{{ role_path }}/files/consul-template_{{ consul_version }}_SHA256SUMS"
+    dest: "{{ role_path }}/files/consul-template_{{ consul_template_version }}_SHA256SUMS"
   become: false
   vars:
     ansible_become: false
