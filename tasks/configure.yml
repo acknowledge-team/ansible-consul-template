@@ -21,3 +21,11 @@
   notify:
     - restart consul-template
 
+- name: Ensure health check scripts has been transferred to the host
+  copy:
+    src: "files/{{ item }}"
+    dest: "{{ consul_template_data_path }}/{{ item }}"
+    owner: "{{ consul_template_user }}"
+    group: "{{ consul_template_group }}"
+    mode: 0644
+  loop: "{{ health_checks_scripts }}"
