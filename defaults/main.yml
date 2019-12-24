@@ -70,3 +70,8 @@ consul_template_files:
 # templates list and configuration
 templates:
   - { "source": "{{ consul_template_data_path }}/example.tpl", "destination": "/etc/example/file.conf", "create_dest_dirs": true, "command": "systemctl reload example", "command_timeout": "40s" }
+
+# script checks
+script_check_enabled: false
+health_check_scripts:
+  - "script.py"
