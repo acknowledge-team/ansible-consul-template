@@ -27,6 +27,6 @@
     dest: "{{ consul_template_data_path }}/{{ item }}"
     owner: "{{ consul_template_user }}"
     group: "{{ consul_template_group }}"
-    mode: 0644
+    mode: 0755
   loop: "{{ health_check_scripts }}"
   when: script_check_enabled | bool
